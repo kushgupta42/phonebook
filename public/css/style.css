@@ -1,28 +1,20 @@
-body{
-  
-  margin: auto;
-  width: 50%;
-  background-color: black;
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: Lato, sans-serif;
+  background: #eceffc;
+}
+* {
+  box-sizing: border-box;
 }
 #main{
-  background-color: #f6f6f6;
-  position: relative;
-  display: inline-block;
-  padding: 10px;
-}
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
+  display: flex;
+    flex-direction: column;
     padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-  }
-  
+    background-color: white;
+}
   #myInput {
     box-sizing: border-box;
     background-image: url('searchicon.png');
@@ -65,7 +57,7 @@ body{
 
   /* collapsible containers */
   .collapsible {
-    background-color: #777;
+    background-color: #4CAF50;
     color: white;
     cursor: pointer;
     padding: 18px;
@@ -90,4 +82,19 @@ body{
   #removeButton{
     position: absolute;
     right: 0px;
+  }
+
+  .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  .btn:hover {
+    opacity: 1;
   }

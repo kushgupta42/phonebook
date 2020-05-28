@@ -25,7 +25,7 @@ body {
     background: #f1f1f1;
   }
   
-  input:focus, {
+  input:focus {
     background-color: #ddd;
     outline: none;
   }
@@ -46,13 +46,4 @@ body {
   
   .btn:hover {
     opacity: 1;
-  }
-
-  a {
-    color: dodgerblue;
-  }
-
-  .signin {
-    background-color: #f1f1f1;
-    text-align: center;
   }
