@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="../css/update.css">
+<form action="/makeChanges" method="post" >
+    <div class="container">
+        <input type="hidden" name="id" value="{{data._id}}"/>
+
+        <label>Name</label><input value="{{data.name}}" name="name"/><br>
+        
+        <label>D.O.B</label><input value="{{data.dateOfBirth}}" name="dateOfBirth"/><br>
+      
+        {{#each data.phoneNumber}}
+    
+            <label>Phone Number</label><input value="{{this}}" name="phoneNumber"/><br>
+      
+        {{/each}}
+        
+        
+        {{#each data.emailID}}
+        
+            <label>Email</label><input value="{{this}}" name="emailID"/><br>
+      
+        {{/each}}
+        
+        <button class="btn" type="submit">UPDATE</button>    
+    </div>
+</form>

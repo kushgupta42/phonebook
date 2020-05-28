@@ -9,7 +9,10 @@
       <button type="button" class="collapsible">{{this.name}}</button>
       <div class="content">
         <p>{{this.dateOfBirth}} 
-        <button id="editButton">edit</button>  
+        <form action="/update" method ="post">
+          <input type="hidden" name="id" value="{{this._id}}"/>
+          <button type="submit">edit</button>
+        </form>  
         <form action="/remove" method="post" >
           <input type="hidden" name="id" value="{{this._id}}"/>
           <button type="submit">remove</button>

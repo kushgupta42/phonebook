@@ -29,7 +29,7 @@ router.get("/",(req,res)=>{
 
 // getting all the contacts
 router.get("/list",(req,res)=>{
-    ContactModel.find({}).lean().exec(function(err,docs){
+    ContactModel.find({}).lean().exec((err,docs)=>{
         if(!err){
             res.render("list",{ data : docs });
             console.log(docs);       
@@ -47,16 +47,42 @@ router.get("/add",(req,res)=>{
 
 router.post("/remove",(req,res)=>{
     console.log(req.body.id);
-    // res.redirect("/");
     ContactModel.findByIdAndRemove({_id:req.body.id}).then((contact)=>{
         console.log(contact.name+"deleted");
         res.redirect("/");
     });
-    
-
 });
+
+// make changes route
+router.post("/makeChanges",(req,res)=>{
+    console.log(req.body.id);
+    ContactModel.findByIdAndUpdate({_id:req.body.id},{name:req.body.name,phoneNumber:req.body.phoneNumber,dateOfBirth:req.body.dateOfBirth,emailID:req.body.emailID},(err,result)=>{
+        if(err){
+            console.log("[!] cannot update data");
+            res.redirect("/");
+        }
+        else{
+            console.log("[+] changes successful");
+            res.redirect("/");
+        }
+    });
+    
+})
+router.post("/update",(req,res)=>{
+    ContactModel.findById({_id:req.body.id}).lean().exec((err,docs)=>{
+        if(!err){
+            console.log("===========================\n");
+            console.log(docs);
+            res.render("update",{ data : docs });
+        }
+        else{
+            res.send("there is some problem");
+            res.redirect("/");
+        }
+    });
+})
 router.post("/add",(req,res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     var contactDetails = new ContactModel();
     contactDetails.name=req.body.name;
     contactDetails.dateOfBirth=req.body.dateOfBirth;
