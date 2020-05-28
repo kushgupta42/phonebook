@@ -106,3 +106,11 @@ body {
     display:inline;
     margin-bottom: 10px;
   }
+
+  .icon-image{
+    width: 20px;
+    height: 20px;
+  }
+  .info-container{
+    margin: 1px;
+  }

@@ -11,10 +11,10 @@
       <div class="content">
         <p>{{this.dateOfBirth}} (yyyy/mm/dd)</p> 
         {{#each this.phoneNumber}}
-        <p>{{this}}</p>
+        <div class="info-container"><img src="../images/smartphone.png" class="icon-image"> {{this}}</div>
         {{/each}}
         {{#each this.emailID}}
-          <p>{{this}}</p>
+        <div class="info-container"><img src="../images/mail.png" class="icon-image"> {{this}}</div>
         {{/each}}
         <div id="frm"><form action="/update" method ="post">
           <input type="hidden" name="id" value="{{this._id}}"/>
