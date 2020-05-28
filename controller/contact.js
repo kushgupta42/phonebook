@@ -83,64 +83,118 @@ router.post("/update",(req,res)=>{
     });
 })
 router.post("/add",(req,res)=>{
-    console.log(req.body);
-    ContactModel.findOne({name: req.body.name}).lean().exec((err,docs)=>{
+    ContactModel.find({}).lean().exec(function(err,docs){
         if(!err){
-            console.log("[!] dubplicate")            
-            res.status(400);
-            res.send("contact with same name already exist, go back to update the contact");
-        }
-        else{
-            var contactDetails = new ContactModel();
-            contactDetails.name=req.body.name;
-            contactDetails.dateOfBirth=req.body.dateOfBirth;
+            var numbers = [];
+            for(var i=0;i<docs.length;i++){
+                numbers = numbers.concat(docs[i]["phoneNumber"]);
+            }
+            var filteredNumbers = [];
             if(typeof req.body.phoneNumber === 'object'){
-                var filtered = req.body.phoneNumber.filter(function (el) {
+                var filteredNumbers = req.body.phoneNumber.filter(function (el) {
                     return el != '';
                 });
-                contactDetails.phoneNumber=filtered;
             }
             else
-                contactDetails.phoneNumber=[req.body.phoneNumber];
-            if(typeof req.body.emailID === 'object')
-                contactDetails.emailID=req.body.emailID;
-            else
-                contactDetails.emailID=[req.body.emailID];
-            contactDetails.save((err,docs)=>{
-                if(!err){
-                    res.redirect("/");
-                }
-                else{
-                    res.send("error occured"+err);
-                }
-
-            });
+                filteredNumbers=[req.body.phoneNumber];
             
-        }
-    });
-    // var contactDetails = new ContactModel();
-    // contactDetails.name=req.body.name;
-    // contactDetails.dateOfBirth=req.body.dateOfBirth;
-    // if(typeof req.body.phoneNumber === 'object'){
-    //     var filtered = req.body.phoneNumber.filter(function (el) {
-    //         return el != '';
-    //     });
-    //     contactDetails.phoneNumber=filtered;
-    // }
-    // else
-    //     contactDetails.phoneNumber=[req.body.phoneNumber];
-    // if(typeof req.body.emailID === 'object')
-    //     contactDetails.emailID=req.body.emailID;
-    // else
-    //     contactDetails.emailID=[req.body.emailID];
-    // contactDetails.save((err,docs)=>{
-    //     if(!err){
-    //         res.redirect("/");
-    //     }
-    //     else{
-    //         res.send("error occured"+err);
-    //     }
+            var flag = false;
+            for(var i = 0;i<filteredNumbers.length;i++){
+                if(numbers.includes(filteredNumbers[i])){
+                    flag=true;
+                    break;
+                }
+            }
+            if(flag){
+                res.status(400);
+                    res.send('Phone number already saved');
+            }
+            else{
+                var contactDetails = new ContactModel();
+                contactDetails.name=req.body.name;
+                contactDetails.dateOfBirth=req.body.dateOfBirth;
+                contactDetails.phoneNumber = filteredNumbers;
+                if(typeof req.body.emailID === 'object')
+                    contactDetails.emailID=req.body.emailID;
+                else
+                    contactDetails.emailID=[req.body.emailID];
+                
+                contactDetails.save((err,docs)=>{
+                    if(!err){
+                        res.redirect("/");
+                    }
+                    else{
+                        res.send("error occured"+err);
+                    }
 
-    // });
-})
+                });
+            }       
+        }
+        else{
+            res.send("there is some problem");
+        }
+    })
+});
+
+// router.post("/add",(req,res)=>{
+//     console.log(req.body);
+//     ContactModel.findOne({name: req.body.name}).lean().exec((err,docs)=>{
+//         if(!err){
+//             console.log("[!] dubplicate")            
+//             res.status(400);
+//             res.send("contact with same name already exist, go back to update the contact");
+//         }
+//         else{
+//             var contactDetails = new ContactModel();
+//             contactDetails.name=req.body.name;
+//             contactDetails.dateOfBirth=req.body.dateOfBirth;
+//             if(typeof req.body.phoneNumber === 'object'){
+//                 var filtered = req.body.phoneNumber.filter(function (el) {
+//                     return el != '';
+//                 });
+//                 contactDetails.phoneNumber=filtered;
+//             }
+//             else
+//                 contactDetails.phoneNumber=[req.body.phoneNumber];
+//             if(typeof req.body.emailID === 'object')
+//                 contactDetails.emailID=req.body.emailID;
+//             else
+//                 contactDetails.emailID=[req.body.emailID];
+//             contactDetails.save((err,docs)=>{
+//                 if(!err){
+//                     res.redirect("/");
+//                 }
+//                 else{
+//                     res.send("error occured"+err);
+//                 }
+
+//             });
+            
+//         }
+//     });
+//     // var contactDetails = new ContactModel();
+//     // contactDetails.name=req.body.name;
+//     // contactDetails.dateOfBirth=req.body.dateOfBirth;
+//     // if(typeof req.body.phoneNumber === 'object'){
+//     //     var filtered = req.body.phoneNumber.filter(function (el) {
+//     //         return el != '';
+//     //     });
+//     //     contactDetails.phoneNumber=filtered;
+//     // }
+//     // else
+//     //     contactDetails.phoneNumber=[req.body.phoneNumber];
+//     // if(typeof req.body.emailID === 'object')
+//     //     contactDetails.emailID=req.body.emailID;
+//     // else
+//     //     contactDetails.emailID=[req.body.emailID];
+//     // contactDetails.save((err,docs)=>{
+//     //     if(!err){
+//     //         res.redirect("/");
+//     //     }
+//     //     else{
+//     //         res.send("error occured"+err);
+//     //     }
+
+//     // });
+// })
 module.exports = router;
