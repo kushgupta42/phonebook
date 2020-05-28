@@ -9,22 +9,22 @@
       {{#each data}}
       <button type="button" class="collapsible">{{this.name}}</button>
       <div class="content">
-        <p>{{this.dateOfBirth}} 
-        <form action="/update" method ="post">
-          <input type="hidden" name="id" value="{{this._id}}"/>
-          <button type="submit">edit</button>
-        </form>  
-        <form action="/remove" method="post" >
-          <input type="hidden" name="id" value="{{this._id}}"/>
-          <button type="submit">remove</button>
-        </form></p>
+        <p>{{this.dateOfBirth}}</p> 
         {{#each this.phoneNumber}}
         <p>{{this}}</p>
         {{/each}}
         {{#each this.emailID}}
           <p>{{this}}</p>
         {{/each}}
-        
+        <div id="frm"><form action="/update" method ="post">
+          <input type="hidden" name="id" value="{{this._id}}"/>
+          <button type="submit">edit</button>
+        </form>  
+        <form action="/remove" method="post" >
+          <input type="hidden" name="id" value="{{this._id}}"/>
+          <button type="submit">remove</button>
+        </form>
+        </div>
       </div>
       
       {{/each}}

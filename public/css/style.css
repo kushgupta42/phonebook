@@ -102,3 +102,7 @@ body {
   .btn:hover {
     opacity: 1;
   }
+  div#frm *{
+    display:inline;
+    margin-bottom: 10px;
+  }
