@@ -3,8 +3,9 @@
   <h2>Phone Book</h2>
   <p>All your near one's are saved here</p>
   <div class="dropdown">
-      <div id="myDropdown" class="dropdown-content">  
-      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+      <div id="myDropdown" class="dropdown-content" style="overflow:auto; height:200px;">  
+      
       {{#each data}}
       <button type="button" class="collapsible">{{this.name}}</button>
       <div class="content">
