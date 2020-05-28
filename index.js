@@ -2,7 +2,7 @@
 * @Author: kush
 * @Date:   2020-05-28 04:21:17
  * @Last Modified by: kush46
- * @Last Modified time: 2020-05-28 17:21:33
+ * @Last Modified time: 2020-05-28 20:22:44
 */
 
 const connection = require("./model");
@@ -37,7 +37,7 @@ app.use(express.static(__dirname + '/public'));
 // setting app to use controller
 app.use("/",ContactController);
 
-// app listening on port
+// app listening on port	
 app.listen("3000",()=>{
 	console.log("server startet");
 });	
