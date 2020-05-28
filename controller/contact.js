@@ -8,6 +8,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+
 // creating mongoose model
 //  model name should be same as that of in the models file mongoose.model fn
 const ContactModel = mongoose.model("Contact");
@@ -83,29 +84,63 @@ router.post("/update",(req,res)=>{
 })
 router.post("/add",(req,res)=>{
     console.log(req.body);
-    var contactDetails = new ContactModel();
-    contactDetails.name=req.body.name;
-    contactDetails.dateOfBirth=req.body.dateOfBirth;
-    if(typeof req.body.phoneNumber === 'object'){
-        var filtered = req.body.phoneNumber.filter(function (el) {
-            return el != '';
-        });
-        contactDetails.phoneNumber=filtered;
-    }
-    else
-        contactDetails.phoneNumber=[req.body.phoneNumber];
-    if(typeof req.body.emailID === 'object')
-        contactDetails.emailID=req.body.emailID;
-    else
-        contactDetails.emailID=[req.body.emailID];
-    contactDetails.save((err,docs)=>{
+    ContactModel.findOne({name: req.body.name}).lean().exec((err,docs)=>{
         if(!err){
-            res.redirect("/");
+            console.log("[!] dubplicate")            
+            res.status(400);
+            res.send("contact with same name already exist, go back to update the contact");
         }
         else{
-            res.send("error occured"+err);
-        }
+            var contactDetails = new ContactModel();
+            contactDetails.name=req.body.name;
+            contactDetails.dateOfBirth=req.body.dateOfBirth;
+            if(typeof req.body.phoneNumber === 'object'){
+                var filtered = req.body.phoneNumber.filter(function (el) {
+                    return el != '';
+                });
+                contactDetails.phoneNumber=filtered;
+            }
+            else
+                contactDetails.phoneNumber=[req.body.phoneNumber];
+            if(typeof req.body.emailID === 'object')
+                contactDetails.emailID=req.body.emailID;
+            else
+                contactDetails.emailID=[req.body.emailID];
+            contactDetails.save((err,docs)=>{
+                if(!err){
+                    res.redirect("/");
+                }
+                else{
+                    res.send("error occured"+err);
+                }
 
+            });
+            
+        }
     });
+    // var contactDetails = new ContactModel();
+    // contactDetails.name=req.body.name;
+    // contactDetails.dateOfBirth=req.body.dateOfBirth;
+    // if(typeof req.body.phoneNumber === 'object'){
+    //     var filtered = req.body.phoneNumber.filter(function (el) {
+    //         return el != '';
+    //     });
+    //     contactDetails.phoneNumber=filtered;
+    // }
+    // else
+    //     contactDetails.phoneNumber=[req.body.phoneNumber];
+    // if(typeof req.body.emailID === 'object')
+    //     contactDetails.emailID=req.body.emailID;
+    // else
+    //     contactDetails.emailID=[req.body.emailID];
+    // contactDetails.save((err,docs)=>{
+    //     if(!err){
+    //         res.redirect("/");
+    //     }
+    //     else{
+    //         res.send("error occured"+err);
+    //     }
+
+    // });
 })
 module.exports = router;
