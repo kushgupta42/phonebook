@@ -82,12 +82,16 @@ router.post("/update",(req,res)=>{
     });
 })
 router.post("/add",(req,res)=>{
-    console.log(typeof req.body.phoneNumber);
+    console.log(req.body);
     var contactDetails = new ContactModel();
     contactDetails.name=req.body.name;
     contactDetails.dateOfBirth=req.body.dateOfBirth;
-    if(typeof req.body.phoneNumber === 'object')
-        contactDetails.phoneNumber=req.body.phoneNumber;
+    if(typeof req.body.phoneNumber === 'object'){
+        var filtered = req.body.phoneNumber.filter(function (el) {
+            return el != '';
+        });
+        contactDetails.phoneNumber=filtered;
+    }
     else
         contactDetails.phoneNumber=[req.body.phoneNumber];
     if(typeof req.body.emailID === 'object')
@@ -99,7 +103,7 @@ router.post("/add",(req,res)=>{
             res.redirect("/");
         }
         else{
-            res.send("error occured");
+            res.send("error occured"+err);
         }
 
     });
