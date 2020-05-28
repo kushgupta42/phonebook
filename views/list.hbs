@@ -1,0 +1,18 @@
+<h1>contacts</h1>
+<table>
+    <tr>
+        <th>name</th>
+        <th>DOB</th>
+        <th>email</th>
+        <th>ph no</th>
+    </tr>
+    {{#each data}}
+    <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.dateOfBirth}}</td>
+        <td>{{this.emailID}}</td>
+        <td>{{this.phoneNumber}}</td>
+    </tr>
+    {{/each}}
+    
+</table>

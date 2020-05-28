@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="../css/style.css">
+<h2>Phone Book</h2>
+<p>All your contscts are saved here</p>
+<div class="dropdown">
+      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" onchange="hideDropDown()">
+  <div id="myDropdown" class="dropdown-content" display="none">
+    {{#each data}}
+    <a href="#about">{{this.name}}</a>
+    {{/each}}
+  </div>
+</div>
+
+<script src="../js/dropDown.js"></script>

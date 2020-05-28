@@ -1,8 +1,8 @@
 /*
 * @Author: kushgupta42
 * @Date:   2020-05-28 04:45:20
-* @Last Modified by:   kushgupta42
-* @Last Modified time: 2020-05-28 05:17:12
+ * @Last Modified by: kush46
+ * @Last Modified time: 2020-05-28 14:52:06
 */
 const mongoose = require("mongoose");
 
@@ -26,4 +26,4 @@ var ContactSchema = new mongoose.Schema({
 	}]
 })
 
-mongoose.model("Cotact",ContactSchema	)
+mongoose.model("Contact",ContactSchema	)
