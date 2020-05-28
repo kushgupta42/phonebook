@@ -3,8 +3,16 @@
     <div class="container">
         <label>Name</label><input value="" name="name"/><br>   
         <label>D.O.B</label><input value="" name="dateOfBirth"/><br>    
-        <label>Phone Number</label><input value="" name="phoneNumber"/><br>    
-        <label>Email</label><input value="" name="emailID"/><br>
+        <div class="align-objects">
+        <div id="phonediv"><label>Phone Number *</label><input value="" name="phoneNumber" id="phno"/></div>
+        <img src="../images/plus.png" class="add" onclick="addPhoneNumber()">
+        </div>
+        <div class="align-objects">
+        <div id="emaildiv"><label>Email *</label><br><input value="" name="emailID" id="email"/></div>
+        <a><img src="../images/plus.png"  class="add" onclick="addEmailID()"></a>
+        </div>
         <button class="btn" type="submit">ADD</button>    
     </div>
 </form>
+
+<script src="../js/addContacts.js"></script>

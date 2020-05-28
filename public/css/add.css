@@ -12,6 +12,7 @@ body {
   }
   .container {
     display: flex;
+    width: 400px;
     flex-direction: column;
     padding: 16px;
     background-color: white;
@@ -47,3 +48,19 @@ body {
   .btn:hover {
     opacity: 1;
   }
+#phno,#email{
+  width: 87.5%;
+}
+div.assign-objects *{
+  display:inline;
+}
+
+.add{
+  margin-top: 20px;
+  width : 40px;
+  height: 40px;
+  background-color: grey;
+  border-radius: 100px;
+  margin-top: 5px;
+}
+

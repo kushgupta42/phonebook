@@ -82,12 +82,18 @@ router.post("/update",(req,res)=>{
     });
 })
 router.post("/add",(req,res)=>{
-    // console.log(req.body);
+    console.log(typeof req.body.phoneNumber);
     var contactDetails = new ContactModel();
     contactDetails.name=req.body.name;
     contactDetails.dateOfBirth=req.body.dateOfBirth;
-    contactDetails.phoneNumber=[req.body.phoneNumber];
-    contactDetails.emailID=[req.body.emailID];
+    if(typeof req.body.phoneNumber === 'object')
+        contactDetails.phoneNumber=req.body.phoneNumber;
+    else
+        contactDetails.phoneNumber=[req.body.phoneNumber];
+    if(typeof req.body.emailID === 'object')
+        contactDetails.emailID=req.body.emailID;
+    else
+        contactDetails.emailID=[req.body.emailID];
     contactDetails.save((err,docs)=>{
         if(!err){
             res.redirect("/");
