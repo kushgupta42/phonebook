@@ -56,3 +56,17 @@ body {
     background-color: #f1f1f1;
     text-align: center;
   }
+
+  div.align-objects *{
+    display:inline;
+  }
+  
+  .add{
+    float: right;
+    width : 15px;
+    height: 15px;
+    background-color: grey;
+    border-radius: 100px;
+    margin-top: 5px;
+  }
+  

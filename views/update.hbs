@@ -6,20 +6,19 @@
         <label>Name</label><input value="{{data.name}}" name="name"/><br>
         
         <label>D.O.B</label><input value="{{data.dateOfBirth}}" name="dateOfBirth"/><br>
-      
-        {{#each data.phoneNumber}}
-    
-            <label>Phone Number</label><input value="{{this}}" name="phoneNumber"/><br>
-      
+        <div class="align-objects"><label>Phone Number</label><a><img src="../images/plus.png"  class="add" onclick="addPhoneNumber()"></a></div>
+        <div id="phonediv">{{#each data.phoneNumber}}
+            <input value="{{this}}" name="phoneNumber"/><br>
         {{/each}}
-        
-        
-        {{#each data.emailID}}
-        
-            <label>Email</label><input value="{{this}}" name="emailID"/><br>
-      
+        </div>
+        <div class="align-objects"><label>Email</label><a><img src="../images/plus.png"  class="add" onclick="addEmailID()"></a></div>
+        <div id="emaildiv">{{#each data.emailID}}
+            <input value="{{this}}" name="emailID"/><br>
         {{/each}}
+        </div>
         
         <button class="btn" type="submit">UPDATE</button>    
     </div>
 </form>
+
+<script src="../js/addContacts.js"></script>
