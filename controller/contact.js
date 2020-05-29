@@ -38,7 +38,23 @@ router.post("/remove",(req,res)=>{
 // after update the changes are made through this route
 router.post("/makeChanges",(req,res)=>{
     console.log(req.body.id);
-    ContactModel.findByIdAndUpdate({_id:req.body.id},{name:req.body.name,phoneNumber:req.body.phoneNumber,dateOfBirth:req.body.dateOfBirth,emailID:req.body.emailID},(err,result)=>{
+    var filteredNumbers = [];
+    var filteredEmailID = [];
+        if(typeof req.body.phoneNumber === 'object'){
+            var filteredNumbers = req.body.phoneNumber.filter(function (el) {
+                return el != '';
+            });
+        }
+        else
+            filteredNumbers=[req.body.phoneNumber];
+        if(typeof req.body.emailID === 'object'){
+            var filteredEmailID = req.body.emailID.filter(function (el) {
+                return el != '';
+            });
+        }
+        else
+            filteredEmailID=[req.body.emailID];
+    ContactModel.findByIdAndUpdate({_id:req.body.id},{name:req.body.name,phoneNumber:filteredNumbers,dateOfBirth:req.body.dateOfBirth,emailID:filteredEmailID},(err,result)=>{
         if(err){
             console.log("[!] cannot update data");
             res.redirect("/");
