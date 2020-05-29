@@ -9,15 +9,14 @@ var ContactSchema = new mongoose.Schema({
 		required : "Required"
 	},
 	dateOfBirth : {
-		type : String,
+		type : String
 	},
 	phoneNumber : [{
 		type : String, 
 		required : "Required"
 	}],
 	emailID : [{
-		type : String, 
-		required : "Required"
+		type : String
 	}]
 })
 
