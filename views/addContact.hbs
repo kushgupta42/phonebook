@@ -1,16 +1,25 @@
 <link rel="stylesheet" href="../css/add.css">
 <form action="/add" method="post" >
     <div class="container">
-        <label>Name</label><input value="" name="name"/><br>   
+        <h1>Add Contact</h1>
+        <label>Name</label><input value="" name="name" required/><br>   
         <label>D.O.B</label><input type="date" value="" name="dateOfBirth"/><br>    
         <div class="align-objects">
-        <div id="phonediv"><label>Phone Number *</label><input type="tel" placeholder="9995551114" pattern="[1-9]{1}[0-9]{9}" value="" name="phoneNumber" id="phno"/></div>
-        <img src="../images/plus.png" class="add" onclick="addPhoneNumber()">
+            <label>Phone Number *</label>
+            <img src="../images/plus.png" class="add" onclick="addPhoneNumber()">
         </div>
+        <div id="phonediv">
+            <input type="tel" placeholder="9995551114" pattern="[1-9]{1}[0-9]{9}" value="" name="phoneNumber" id="phno" required/>
+        </div>
+        
+        
         <div class="align-objects">
-        <div id="emaildiv"><label>Email *</label><br><input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="" name="emailID" id="email"/></div>
-        <a><img src="../images/plus.png"  class="add" onclick="addEmailID()"></a>
+            <label>Email *</label>
+            <img src="../images/plus.png"  class="add" onclick="addEmailID()">
         </div>
+        <div id="emaildiv"><input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="" name="emailID" id="email"/></div>
+        
+        
         <button class="btn" type="submit">ADD</button>    
     </div>
 </form>

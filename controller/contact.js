@@ -28,33 +28,22 @@ router.get("/",(req,res)=>{
     })
 });
 
-// getting all the contacts
-router.get("/list",(req,res)=>{
-    ContactModel.find({}).lean().exec((err,docs)=>{
-        if(!err){
-            res.render("list",{ data : docs });
-            console.log(docs);       
-        }
-        else{
-            res.send("there is some problem");
-        }
-    })
-});
 
-
+// get request fir adding cobtacts
 router.get("/add",(req,res)=>{
     res.render("addContact",{});
 });
 
+//  post request to remove contact
 router.post("/remove",(req,res)=>{
     console.log(req.body.id);
+    // since only databse items are shown in the list, so no need to heck for the item in data base
     ContactModel.findByIdAndRemove({_id:req.body.id}).then((contact)=>{
-        console.log(contact.name+"deleted");
         res.redirect("/");
     });
 });
 
-// make changes route
+// after update the changes are made through this route
 router.post("/makeChanges",(req,res)=>{
     console.log(req.body.id);
     ContactModel.findByIdAndUpdate({_id:req.body.id},{name:req.body.name,phoneNumber:req.body.phoneNumber,dateOfBirth:req.body.dateOfBirth,emailID:req.body.emailID},(err,result)=>{
@@ -69,11 +58,11 @@ router.post("/makeChanges",(req,res)=>{
     });
     
 })
+
+// update function called
 router.post("/update",(req,res)=>{
     ContactModel.findById({_id:req.body.id}).lean().exec((err,docs)=>{
         if(!err){
-            console.log("===========================\n");
-            console.log(docs);
             res.render("update",{ data : docs });
         }
         else{
@@ -82,13 +71,18 @@ router.post("/update",(req,res)=>{
         }
     });
 })
+
+// adding data to data base 
 router.post("/add",(req,res)=>{
     ContactModel.find({}).lean().exec(function(err,docs){
         if(!err){
+            // finding if number is already sabe dor not
             var numbers = [];
+            //  appending all the numbers to an array 
             for(var i=0;i<docs.length;i++){
                 numbers = numbers.concat(docs[i]["phoneNumber"]);
             }
+            //  changing  the received number to array of not empty string
             var filteredNumbers = [];
             if(typeof req.body.phoneNumber === 'object'){
                 var filteredNumbers = req.body.phoneNumber.filter(function (el) {
@@ -98,6 +92,7 @@ router.post("/add",(req,res)=>{
             else
                 filteredNumbers=[req.body.phoneNumber];
             
+            // checking if number exist in array  
             var flag = false;
             for(var i = 0;i<filteredNumbers.length;i++){
                 if(numbers.includes(filteredNumbers[i])){
@@ -105,6 +100,7 @@ router.post("/add",(req,res)=>{
                     break;
                 }
             }
+            //  if number is present flag becomes true else will remain false
             if(flag){
                 res.status(400);
                     res.send('Phone number already saved');
@@ -135,66 +131,4 @@ router.post("/add",(req,res)=>{
         }
     })
 });
-
-// router.post("/add",(req,res)=>{
-//     console.log(req.body);
-//     ContactModel.findOne({name: req.body.name}).lean().exec((err,docs)=>{
-//         if(!err){
-//             console.log("[!] dubplicate")            
-//             res.status(400);
-//             res.send("contact with same name already exist, go back to update the contact");
-//         }
-//         else{
-//             var contactDetails = new ContactModel();
-//             contactDetails.name=req.body.name;
-//             contactDetails.dateOfBirth=req.body.dateOfBirth;
-//             if(typeof req.body.phoneNumber === 'object'){
-//                 var filtered = req.body.phoneNumber.filter(function (el) {
-//                     return el != '';
-//                 });
-//                 contactDetails.phoneNumber=filtered;
-//             }
-//             else
-//                 contactDetails.phoneNumber=[req.body.phoneNumber];
-//             if(typeof req.body.emailID === 'object')
-//                 contactDetails.emailID=req.body.emailID;
-//             else
-//                 contactDetails.emailID=[req.body.emailID];
-//             contactDetails.save((err,docs)=>{
-//                 if(!err){
-//                     res.redirect("/");
-//                 }
-//                 else{
-//                     res.send("error occured"+err);
-//                 }
-
-//             });
-            
-//         }
-//     });
-//     // var contactDetails = new ContactModel();
-//     // contactDetails.name=req.body.name;
-//     // contactDetails.dateOfBirth=req.body.dateOfBirth;
-//     // if(typeof req.body.phoneNumber === 'object'){
-//     //     var filtered = req.body.phoneNumber.filter(function (el) {
-//     //         return el != '';
-//     //     });
-//     //     contactDetails.phoneNumber=filtered;
-//     // }
-//     // else
-//     //     contactDetails.phoneNumber=[req.body.phoneNumber];
-//     // if(typeof req.body.emailID === 'object')
-//     //     contactDetails.emailID=req.body.emailID;
-//     // else
-//     //     contactDetails.emailID=[req.body.emailID];
-//     // contactDetails.save((err,docs)=>{
-//     //     if(!err){
-//     //         res.redirect("/");
-//     //     }
-//     //     else{
-//     //         res.send("error occured"+err);
-//     //     }
-
-//     // });
-// })
 module.exports = router;

@@ -1,18 +1,21 @@
 body {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    font-family: Lato, sans-serif;
-    background: #eceffc;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: Lato, sans-serif;
+  background: #eceffc;
   }
   
   * {
     box-sizing: border-box;
   }
   .container {
-    display: flex;
-    flex-direction: column;
+    position:absolute;
+    top: 30%;
+    left: 47%;
+    margin-top: -9em;
+    margin-left: -15em;
+    width: 600px;
     padding: 16px;
     background-color: white;
   }
