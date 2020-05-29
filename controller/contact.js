@@ -1,13 +1,5 @@
-/*
-* @Author: kushgupta42
-* @Date:   2020-05-28 14:30:29
- * @Last Modified by: kush46
- * @Last Modified time: 2020-05-28 14:34:411
-*/
-
 const express = require("express");
 const mongoose = require("mongoose");
-
 
 // creating mongoose model
 //  model name should be same as that of in the models file mongoose.model fn

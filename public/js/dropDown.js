@@ -5,12 +5,10 @@ function filterFunction() {
   var input, filter, ul, li, a, i;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
-  console.log(filter);
   div = document.getElementById("myDropdown");
   a = div.getElementsByClassName("collapsible");
   for (i = 0; i < a.length; i++) {
     txtValue = a[i].textContent || a[i].innerText;
-    console.log(txtValue);
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
       a[i].style.display = "";
     } else {
@@ -18,9 +16,6 @@ function filterFunction() {
     }
   }
 }
-
-
-
 
 // collapsible containers
 var coll = document.getElementsByClassName("collapsible");
