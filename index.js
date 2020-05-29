@@ -2,7 +2,7 @@
 * @Author: kush
 * @Date:   2020-05-28 04:21:17
  * @Last Modified by: kush46
- * @Last Modified time: 2020-05-29 06:24:25
+ * @Last Modified time: 2020-05-29 06:56:28
 */
 
 const connection = require("./model");
