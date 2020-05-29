@@ -2,7 +2,7 @@
 * @Author: kush
 * @Date:   2020-05-28 04:21:17
  * @Last Modified by: kush46
- * @Last Modified time: 2020-05-28 20:22:44
+ * @Last Modified time: 2020-05-29 06:24:25
 */
 
 const connection = require("./model");
@@ -12,6 +12,9 @@ const path = require("path");
 const expressHandlebars = require("express-handlebars");
 const bodyparser = require("body-parser");
 const ContactController = require("./controller/contact")
+
+// getting port
+const port = process.env.PORT || 3000;
 
 // creating application
 app.use(bodyparser.urlencoded({
@@ -38,6 +41,6 @@ app.use(express.static(__dirname + '/public'));
 app.use("/",ContactController);
 
 // app listening on port	
-app.listen("3000",()=>{
+app.listen(port,()=>{
 	console.log("server startet");
 });	
